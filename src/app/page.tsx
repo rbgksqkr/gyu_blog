@@ -1,9 +1,9 @@
-import PostSection from '@/components/post/PostSection';
+import HomeSection from '@/components/home/HomeSection';
 
 const HomePage = () => {
 	return (
 		<>
-			<PostSection />
+			<HomeSection />
 		</>
 	);
 };

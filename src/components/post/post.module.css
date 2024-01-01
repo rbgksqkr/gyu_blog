@@ -1,0 +1,42 @@
+.postWrapper {
+  display: flex;
+  justify-content: center;
+  
+}
+
+.postLeftSection {
+  flex-basis: 20vw;
+  padding: 30px;
+}
+
+.postRightSection {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 80vw;
+  gap: 20px;
+  padding: 30px 0px;
+}
+
+.postItem {
+  display: flex;
+  align-items: center;
+  height: 15vh;
+}
+
+.postTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.leftPost {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  width: 50vw;
+  padding:0px 30px;
+}
+
+.postContent {
+  color: grey;
+}

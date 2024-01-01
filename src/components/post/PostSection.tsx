@@ -1,34 +1,55 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import RssParser from 'rss-parser';
-import { getAllPost } from '@/apis/post';
-import { IPost } from '@/types/post';
+import styles from './post.module.css';
+import { getAllPost, getRssUserInfo } from '@/apis/post';
+import { IPost, IUserInfo } from '@/types/post';
+import Image from 'next/image';
 
 const PostSection = () => {
 	const [posts, setPosts] = useState<IPost[]>([]);
-
-	const handleRSS = async () => {
-		const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
-		const parser = new RssParser();
-		await parser.parseURL(CORS_PROXY + 'https://v2.velog.io/rss/@ghenmaru', function (err, feed) {
-			if (err) throw err;
-			// console.log('feed :', feed);
-			feed.items.forEach(function (entry) {
-				// console.log('entry :', entry);
-				// console.log(entry.title + ':' + entry.link);
-			});
-		});
-		// await getPostId();
-	};
+	const [userInfo, setUserInfo] = useState<IUserInfo | undefined>();
 
 	useEffect(() => {
 		getAllPost().then((res) => {
 			setPosts(res);
 		});
+
+		getRssUserInfo().then((res) => {
+			setUserInfo(res);
+		});
 	}, []);
 
-	return <div>PostSection</div>;
+	return (
+		<div className={styles.postWrapper}>
+			<div className={styles.postLeftSection}>
+				<Image src='/default_profile.png' alt='profile image' width={200} height={200} priority />
+				{userInfo && (
+					<>
+						<Image src={userInfo.url} alt='profile image' width={200} height={200} priority />
+						<div>{userInfo.title}</div>
+					</>
+				)}
+			</div>
+			<div className={styles.postRightSection}>
+				{posts.length > 0 ? (
+					<>
+						{posts.map((post) => (
+							<div className={styles.postItem} key={post.id}>
+								<div className={styles.leftPost}>
+									<div className={styles.postTitle}>{post.title}</div>
+									<div className={styles.postContent}>{post.short_description}</div>
+								</div>
+								{post.thumbnail && <Image src={post.thumbnail} alt='thumbnail' width={200} height={120} />}
+							</div>
+						))}
+					</>
+				) : (
+					<div>게시글이 없습니다.</div>
+				)}
+			</div>
+		</div>
+	);
 };
 
 export default PostSection;

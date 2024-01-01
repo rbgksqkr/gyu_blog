@@ -10,3 +10,9 @@ export interface IPost {
 	is_private: boolean | null;
 	likes: number;
 }
+
+export interface IUserInfo {
+	url: string;
+	link?: string | undefined;
+	title?: string | undefined;
+}
