@@ -1,5 +1,6 @@
-import { IPost } from '@/types/post';
 import axios from 'axios';
+import RssParser from 'rss-parser';
+import { IPost, IUserInfo } from '@/types/post';
 
 const BASE_URL = 'https://v2cdn.velog.io/graphql';
 const USER_NAME = 'ghenmaru';
@@ -18,10 +19,10 @@ const getPosts = async (cursor: string): Promise<IPost[]> => {
 };
 
 export const getAllPost = async (): Promise<IPost[]> => {
-	const MAX_ITERATION = 20;
+	const MAX_ITERATION = 1;
 	let currentCursor = '';
 	const posts: IPost[] = [];
-	while (MAX_ITERATION) {
+	for (let i = 0; i < MAX_ITERATION; i++) {
 		const result = await getPosts(currentCursor);
 		posts.push(...result);
 		const lastPost = result[result.length - 1];
@@ -29,4 +30,16 @@ export const getAllPost = async (): Promise<IPost[]> => {
 		currentCursor = result[result.length - 1].id;
 	}
 	return posts;
+};
+
+export const getRssUserInfo = async (): Promise<IUserInfo | undefined> => {
+	try {
+		const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
+		const parser = new RssParser();
+		const result = await parser.parseURL(CORS_PROXY + 'https://v2.velog.io/rss/@ghenmaru');
+		// if (result.image === undefined) throw Error('[ERROR] 유저 이미지가 없습니다.');
+		return result.image;
+	} catch (error) {
+		console.error();
+	}
 };
