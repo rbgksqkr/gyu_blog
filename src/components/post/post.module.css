@@ -42,3 +42,9 @@
 .postContent {
   color: grey;
 }
+
+.likeWrapper {
+  display: flex;
+  gap: 10px;
+  font-size: 0.8rem;
+}

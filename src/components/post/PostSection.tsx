@@ -42,6 +42,10 @@ const PostSection = () => {
 								<div className={styles.leftPost}>
 									<div className={styles.postTitle}>{post.title}</div>
 									<div className={styles.postContent}>{post.short_description}</div>
+									<div className={styles.likeWrapper}>
+										<div>좋아요 : {post.likes}</div>
+										<div>댓글 : {post.comments_count}</div>
+									</div>
 								</div>
 								{post.thumbnail && <Image src={post.thumbnail} alt='thumbnail' width={200} height={120} />}
 							</Link>
