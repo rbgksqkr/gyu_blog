@@ -13,7 +13,7 @@ const getPosts = async (cursor: string): Promise<IPost[]> => {
 			cursor: cursor,
 		},
 		query:
-			'query Posts($cursor: ID, $username: String, $temp_only: Boolean, $tag: String, $limit: Int) { posts(cursor: $cursor, username: $username, temp_only: $temp_only, tag: $tag, limit: $limit) {id title thumbnail comments_count likes tags is_private, released_at updated_at short_description}}',
+			'query Posts($cursor: ID, $username: String, $temp_only: Boolean, $tag: String, $limit: Int) { posts(cursor: $cursor, username: $username, temp_only: $temp_only, tag: $tag, limit: $limit) {id title thumbnail comments_count likes tags is_private, released_at updated_at short_description url_slug}}',
 	});
 	return response.data.data.posts;
 };
@@ -36,7 +36,7 @@ export const getRssUserInfo = async (): Promise<IUserInfo | undefined> => {
 	try {
 		const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
 		const parser = new RssParser();
-		const result = await parser.parseURL(CORS_PROXY + 'https://v2.velog.io/rss/@ghenmaru');
+		const result = await parser.parseURL(CORS_PROXY + `https://v2.velog.io/rss/@${USER_NAME}`);
 		// if (result.image === undefined) throw Error('[ERROR] 유저 이미지가 없습니다.');
 		return result.image;
 	} catch (error) {

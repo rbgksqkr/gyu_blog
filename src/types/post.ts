@@ -2,6 +2,7 @@ export interface IPost {
 	id: string;
 	title: string;
 	short_description: string;
+	url_slug: string;
 	thumbnail: string;
 	released_at: string;
 	updated_at: string;
