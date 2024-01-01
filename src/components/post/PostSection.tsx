@@ -26,12 +26,13 @@ const PostSection = () => {
 	return (
 		<div className={styles.postWrapper}>
 			<div className={styles.postLeftSection}>
-				<Image src='/default_profile.png' alt='profile image' width={200} height={200} priority />
-				{userInfo && (
+				{userInfo ? (
 					<>
 						<Image src={userInfo.url} alt='profile image' width={200} height={200} priority />
 						<div>{userInfo.title}</div>
 					</>
+				) : (
+					<Image src='/default_profile.png' alt='profile image' width={200} height={200} priority />
 				)}
 			</div>
 			<div className={styles.postRightSection}>
@@ -45,6 +46,13 @@ const PostSection = () => {
 									<div className={styles.likeWrapper}>
 										<div>좋아요 : {post.likes}</div>
 										<div>댓글 : {post.comments_count}</div>
+									</div>
+									<div className={styles.tagWrapper}>
+										{post.tags.map((tag, idx) => (
+											<div className={styles.tag} key={idx}>
+												{tag}
+											</div>
+										))}
 									</div>
 								</div>
 								{post.thumbnail && <Image src={post.thumbnail} alt='thumbnail' width={200} height={120} />}
