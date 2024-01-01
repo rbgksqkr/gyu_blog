@@ -1,0 +1,11 @@
+.navBar {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 0px;
+  background-color: lightgray;
+}
+
+.link {
+  text-decoration : none;
+  color : black;
+}

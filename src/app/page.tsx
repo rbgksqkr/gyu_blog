@@ -1,7 +1,11 @@
-import styles from './page.module.css';
+import HomeSection from '@/components/home/HomeSection';
 
 const HomePage = () => {
-	return <div>홈페이지</div>;
+	return (
+		<>
+			<HomeSection />
+		</>
+	);
 };
 
 export default HomePage;
