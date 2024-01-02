@@ -1,5 +1,11 @@
+import CommitList from '@/components/study/CommitList';
+
 const StudyPage = () => {
-	return <div>StudyPage</div>;
+	return (
+		<>
+			<CommitList />
+		</>
+	);
 };
 
 export default StudyPage;
