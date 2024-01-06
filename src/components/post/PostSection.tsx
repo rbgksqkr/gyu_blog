@@ -4,20 +4,19 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './post.module.css';
-import { getAllPost, getRssUserInfo } from '@/apis/post';
+import { getVelogPost, getVelogUserInfo } from '@/apis/post';
 import { IPost, IUserInfo } from '@/types/post';
 
 const PostSection = () => {
 	const [posts, setPosts] = useState<IPost[]>([]);
-	const [userInfo, setUserInfo] = useState<IUserInfo | undefined>();
+	const [userInfo, setUserInfo] = useState<IUserInfo>();
 
 	useEffect(() => {
-		getAllPost().then((res) => {
-			setPosts(res);
+		getVelogPost().then((res) => {
+			if (res !== undefined) setPosts(res);
 		});
-
-		getRssUserInfo().then((res) => {
-			setUserInfo(res);
+		getVelogUserInfo().then((res) => {
+			if (res !== undefined) setUserInfo(res);
 		});
 	}, []);
 
