@@ -1,7 +1,8 @@
 'use client';
 
-import { getCommitList } from '@/apis/user';
 import { useEffect, useState } from 'react';
+import styles from './study.module.css';
+import { getCommitList } from '@/apis/user';
 
 interface ICommit {
 	author: {
@@ -22,6 +23,8 @@ interface ICommit {
 	};
 }
 
+const DAYS = ['MON', 'TUE', 'WEB', 'THR', 'FRI', 'SAT', 'SUN'];
+
 const CommitList = () => {
 	const [commits, setCommits] = useState<ICommit[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
@@ -38,12 +41,21 @@ const CommitList = () => {
 				<div>로딩중...</div>
 			) : (
 				<>
+					<div className={styles.commitTitle}> Gyuhan Park의 commit log</div>
+					<div className={styles.dayContainer}>
+						{DAYS.map((day, idx) => (
+							<div key={idx} className={styles.commitBoxContainer}>
+								<div className={styles.day}>{day}</div>
+								<div className={styles.commitBox}>✔️</div>
+							</div>
+						))}
+					</div>
+
 					{commits.length > 0 ? (
 						<div>
 							{commits.map((data) => (
-								<div key={data.node_id}>
-									<div>author : {data.author.login}</div>
-									<div>commit : {data.commit.message}</div>
+								<div key={data.node_id} className={styles.commitItem}>
+									<div>commit message : {data.commit.message}</div>
 								</div>
 							))}
 						</div>
