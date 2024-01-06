@@ -2,13 +2,11 @@ import { IPost } from '@/types/post';
 import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 
-const USER_NAME = 'ghenmaru';
-
 const getPosts = async (cursor: string): Promise<IPost[]> => {
 	const response = await axios.post(`${process.env.NEXT_PUBLIC_VELOG_BASE_URL}`, {
 		operationName: 'Posts',
 		variables: {
-			username: USER_NAME,
+			username: 'ghenmaru',
 			cursor: cursor,
 		},
 		query:
