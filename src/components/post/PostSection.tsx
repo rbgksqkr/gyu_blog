@@ -4,22 +4,26 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './post.module.css';
-import { getAllPost, getRssUserInfo } from '@/apis/post';
+import { getVelogPost, getVelogUserInfo } from '@/apis/post';
 import { IPost, IUserInfo } from '@/types/post';
 
-const PostSection = () => {
-	const [posts, setPosts] = useState<IPost[]>([]);
-	const [userInfo, setUserInfo] = useState<IUserInfo | undefined>();
+interface PostSectionProps {
+	posts: IPost[];
+	userInfo: IUserInfo;
+}
 
-	useEffect(() => {
-		getAllPost().then((res) => {
-			setPosts(res);
-		});
+const PostSection = ({ posts, userInfo }: PostSectionProps) => {
+	// const [posts, setPosts] = useState<IPost[]>([]);
+	// const [userInfo, setUserInfo] = useState<IUserInfo>();
 
-		getRssUserInfo().then((res) => {
-			setUserInfo(res);
-		});
-	}, []);
+	// useEffect(() => {
+	// 	getVelogPost().then((res) => {
+	// 		setPosts(res);
+	// 	});
+	// 	getVelogUserInfo().then((res) => {
+	// 		setUserInfo(res);
+	// 	});
+	// }, []);
 
 	return (
 		<div className={styles.postWrapper}>
