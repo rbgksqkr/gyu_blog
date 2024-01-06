@@ -3,16 +3,25 @@ import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 
 const getPosts = async (cursor: string): Promise<IPost[]> => {
-	const response = await axios.post(`${process.env.NEXT_PUBLIC_VELOG_BASE_URL}`, {
-		operationName: 'Posts',
-		variables: {
-			username: 'ghenmaru',
-			cursor: cursor,
+	const res = await fetch(`${process.env.NEXT_PUBLIC_VELOG_BASE_URL}`, {
+		method: 'POST',
+		next: { revalidate: 300 },
+		headers: {
+			'Content-Type': 'application/json',
 		},
-		query:
-			'query Posts($cursor: ID, $username: String, $temp_only: Boolean, $tag: String, $limit: Int) { posts(cursor: $cursor, username: $username, temp_only: $temp_only, tag: $tag, limit: $limit) {id title thumbnail comments_count likes tags is_private, released_at updated_at short_description url_slug}}',
+		body: JSON.stringify({
+			operationName: 'Posts',
+			variables: {
+				username: 'ghenmaru',
+				cursor: cursor,
+			},
+			query:
+				'query Posts($cursor: ID, $username: String, $temp_only: Boolean, $tag: String, $limit: Int) { posts(cursor: $cursor, username: $username, temp_only: $temp_only, tag: $tag, limit: $limit) {id title thumbnail comments_count likes tags is_private, released_at updated_at short_description url_slug}}',
+		}),
 	});
-	return response.data.data.posts;
+
+	const data = await res.json();
+	return data.data.posts;
 };
 
 export async function GET(req: NextRequest) {
