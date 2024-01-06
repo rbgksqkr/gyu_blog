@@ -1,10 +1,8 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './post.module.css';
-import { getVelogPost, getVelogUserInfo } from '@/apis/post';
 import { IPost, IUserInfo } from '@/types/post';
 
 interface PostSectionProps {
@@ -13,18 +11,6 @@ interface PostSectionProps {
 }
 
 const PostSection = ({ posts, userInfo }: PostSectionProps) => {
-	// const [posts, setPosts] = useState<IPost[]>([]);
-	// const [userInfo, setUserInfo] = useState<IUserInfo>();
-
-	// useEffect(() => {
-	// 	getVelogPost().then((res) => {
-	// 		setPosts(res);
-	// 	});
-	// 	getVelogUserInfo().then((res) => {
-	// 		setUserInfo(res);
-	// 	});
-	// }, []);
-
 	return (
 		<div className={styles.postWrapper}>
 			<div className={styles.postLeftSection}>

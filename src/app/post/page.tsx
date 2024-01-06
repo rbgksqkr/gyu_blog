@@ -8,7 +8,6 @@ const PostPage = async () => {
 	return (
 		<>
 			<PostSection posts={posts} userInfo={userInfo} />
-			{/* <PostSection /> */}
 		</>
 	);
 };
