@@ -4,33 +4,13 @@ import { useEffect, useState } from 'react';
 import styles from './study.module.css';
 import { getRecentCommitList } from '@/apis/user';
 import { DAYS } from '@/constants';
-
-interface ICommit {
-	author: {
-		login: string;
-		avatar_url: string;
-	};
-	commit: {
-		author: {
-			date: Date;
-		};
-		url: string;
-		message: string;
-	};
-	node_id: string;
-	repository: {
-		id: number;
-		node_id: string;
-		name: string;
-		full_name: string;
-		private: boolean;
-	};
-}
+import { ICommit } from '@/types/post';
 
 interface ICommitContainer {
 	id: number;
 	isCommitted: boolean;
 	day: string;
+	isToday: boolean;
 }
 
 const CommitList = () => {
@@ -48,6 +28,7 @@ const CommitList = () => {
 
 	const convertDate = (res: ICommit[]) => {
 		const lastWeek = [false, false, false, false, false, false, false];
+		let todayIdx = new Date(res[res.length - 1].commit.author.date).getDay();
 		res.forEach((data) => {
 			lastWeek[new Date(data.commit.author.date).getDay()] = true;
 		});
@@ -56,6 +37,7 @@ const CommitList = () => {
 				id: idx,
 				isCommitted: lastWeek[idx],
 				day,
+				isToday: idx === todayIdx ? true : false,
 			})),
 		);
 	};
@@ -70,7 +52,9 @@ const CommitList = () => {
 					<div className={styles.dayContainer}>
 						{dateList.map((data, idx) => (
 							<div key={idx} className={styles.commitBoxContainer}>
-								<div className={styles.day}>{data.day}</div>
+								<div className={data.isToday ? styles.today : styles.day}>
+									{data.isToday ? `${data.day}(TODAY)` : data.day}
+								</div>
 								<div className={styles.commitBox}>{data.isCommitted ? '✔️' : ''}</div>
 							</div>
 						))}
@@ -80,7 +64,10 @@ const CommitList = () => {
 						<div>
 							{commits.map((data) => (
 								<div key={data.node_id} className={styles.commitItem}>
-									<div>commit message : {data.commit.message}</div>
+									<div>
+										{data.repository.full_name} : {data.commit.message} |{' '}
+										{data.commit.author.date.toLocaleString().split('T')[0]}
+									</div>
 								</div>
 							))}
 						</div>

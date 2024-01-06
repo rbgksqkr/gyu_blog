@@ -21,8 +21,13 @@
   gap: 10px;
 }
 
-.day{
+.day {
   font-weight: bold;
+}
+
+.today {
+  font-weight: bold;
+  color: red;
 }
 
 .commitBox {
