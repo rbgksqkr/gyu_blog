@@ -2,11 +2,10 @@ import axios from 'axios';
 import RssParser from 'rss-parser';
 import { IPost, IUserInfo } from '@/types/post';
 
-const BASE_URL = 'https://v2cdn.velog.io/graphql';
 const USER_NAME = 'ghenmaru';
 
 const getPosts = async (cursor: string): Promise<IPost[]> => {
-	const response = await axios.post(BASE_URL, {
+	const response = await axios.post(`${process.env.NEXT_PUBLIC_VELOG_BASE_URL}`, {
 		operationName: 'Posts',
 		variables: {
 			username: USER_NAME,
@@ -34,10 +33,8 @@ export const getAllPost = async (): Promise<IPost[]> => {
 
 export const getRssUserInfo = async (): Promise<IUserInfo | undefined> => {
 	try {
-		const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
 		const parser = new RssParser();
-		const result = await parser.parseURL(CORS_PROXY + `https://v2.velog.io/rss/@${USER_NAME}`);
-		// if (result.image === undefined) throw Error('[ERROR] 유저 이미지가 없습니다.');
+		const result = await parser.parseURL(`${process.env.NEXT_PUBLIC_RSS_BASE_URL}`);
 		return result.image;
 	} catch (error) {
 		console.error();

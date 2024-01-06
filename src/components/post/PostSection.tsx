@@ -1,13 +1,11 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import styles from './post.module.css';
 import { getAllPost, getRssUserInfo } from '@/apis/post';
 import { IPost, IUserInfo } from '@/types/post';
-import Image from 'next/image';
-import Link from 'next/link';
-
-const VELOG_BASE_URL = 'https://velog.io/@ghenmaru';
 
 const PostSection = () => {
 	const [posts, setPosts] = useState<IPost[]>([]);
@@ -39,7 +37,11 @@ const PostSection = () => {
 				{posts.length > 0 ? (
 					<>
 						{posts.map((post) => (
-							<Link href={`${VELOG_BASE_URL}/${post.url_slug}`} className={styles.postItem} key={post.id}>
+							<Link
+								href={`${process.env.NEXT_PUBLIC_VELOG_BASE_URL}/${post.url_slug}`}
+								className={styles.postItem}
+								key={post.id}
+							>
 								<div className={styles.leftPost}>
 									<div className={styles.postTitle}>{post.title}</div>
 									<div className={styles.postContent}>{post.short_description}</div>
