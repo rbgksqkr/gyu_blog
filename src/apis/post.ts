@@ -34,10 +34,8 @@ export const getAllPost = async (): Promise<IPost[]> => {
 
 export const getRssUserInfo = async (): Promise<IUserInfo | undefined> => {
 	try {
-		const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
 		const parser = new RssParser();
-		const result = await parser.parseURL(CORS_PROXY + `https://v2.velog.io/rss/@${USER_NAME}`);
-		// if (result.image === undefined) throw Error('[ERROR] 유저 이미지가 없습니다.');
+		const result = await parser.parseURL(`${process.env.NEXT_PUBLIC_VELOG_BASE_URL}`);
 		return result.image;
 	} catch (error) {
 		console.error();
