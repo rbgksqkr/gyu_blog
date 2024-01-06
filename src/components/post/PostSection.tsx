@@ -27,11 +27,7 @@ const PostSection = ({ posts, userInfo }: PostSectionProps) => {
 				{posts.length > 0 ? (
 					<>
 						{posts.map((post) => (
-							<Link
-								href={`${process.env.NEXT_PUBLIC_VELOG_BASE_URL}/${post.url_slug}`}
-								className={styles.postItem}
-								key={post.id}
-							>
+							<Link href={`https://velog.io/@ghenmaru/${post.url_slug}`} className={styles.postItem} key={post.id}>
 								<div className={styles.leftPost}>
 									<div className={styles.postTitle}>{post.title}</div>
 									<div className={styles.postContent}>{post.short_description}</div>
