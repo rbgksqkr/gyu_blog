@@ -1,9 +1,14 @@
+import { getVelogPost, getVelogUserInfo } from '@/apis/post';
 import PostSection from '@/components/post/PostSection';
 
-const PostPage = () => {
+const PostPage = async () => {
+	const posts = await getVelogPost();
+	const userInfo = await getVelogUserInfo();
+
 	return (
 		<>
-			<PostSection />
+			<PostSection posts={posts} userInfo={userInfo} />
+			{/* <PostSection /> */}
 		</>
 	);
 };

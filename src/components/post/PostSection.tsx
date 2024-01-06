@@ -7,18 +7,23 @@ import styles from './post.module.css';
 import { getVelogPost, getVelogUserInfo } from '@/apis/post';
 import { IPost, IUserInfo } from '@/types/post';
 
-const PostSection = () => {
-	const [posts, setPosts] = useState<IPost[]>([]);
-	const [userInfo, setUserInfo] = useState<IUserInfo>();
+interface PostSectionProps {
+	posts: IPost[];
+	userInfo: IUserInfo;
+}
 
-	useEffect(() => {
-		getVelogPost().then((res) => {
-			setPosts(res);
-		});
-		getVelogUserInfo().then((res) => {
-			setUserInfo(res);
-		});
-	}, []);
+const PostSection = ({ posts, userInfo }: PostSectionProps) => {
+	// const [posts, setPosts] = useState<IPost[]>([]);
+	// const [userInfo, setUserInfo] = useState<IUserInfo>();
+
+	// useEffect(() => {
+	// 	getVelogPost().then((res) => {
+	// 		setPosts(res);
+	// 	});
+	// 	getVelogUserInfo().then((res) => {
+	// 		setUserInfo(res);
+	// 	});
+	// }, []);
 
 	return (
 		<div className={styles.postWrapper}>

@@ -16,7 +16,7 @@ const getPosts = async (cursor: string): Promise<IPost[]> => {
 };
 
 export async function GET(req: NextRequest) {
-	const MAX_ITERATION = 1;
+	const MAX_ITERATION = 5;
 	let currentCursor = '';
 	const posts: IPost[] = [];
 	for (let i = 0; i < MAX_ITERATION; i++) {
