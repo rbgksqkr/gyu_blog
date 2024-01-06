@@ -13,10 +13,10 @@ const PostSection = () => {
 
 	useEffect(() => {
 		getVelogPost().then((res) => {
-			if (res !== undefined) setPosts(res);
+			setPosts(res);
 		});
 		getVelogUserInfo().then((res) => {
-			if (res !== undefined) setUserInfo(res);
+			setUserInfo(res);
 		});
 	}, []);
 
