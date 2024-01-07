@@ -1,30 +1,16 @@
 'use client';
 
-import { getProjectList } from '@/apis/user';
-import { IProject } from '@/types/post';
-import axios from 'axios';
+import { IProject, IUserProfile } from '@/types/user';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import styles from './about.module.css';
 
-const USER_INFO = {
-	email: 'rbgks1937@naver.com',
-	phoneNumber: '010-4339-1937',
-	githubUrl: 'https://github.com/rbgksqkr',
-	blogUrl: 'https://velog.io/@ghenmaru',
-	portfolioUrl: 'https://drive.google.com/file/d/1tBL3ntsa9JCub1acXsVAljtXXNuzJkWY/view?usp=sharing',
-};
+interface AboutSectionProps {
+	projectList: IProject[];
+	userProfile: IUserProfile;
+}
 
-const AboutSection = () => {
-	const [projectList, setProjectList] = useState<IProject[]>([]);
-
-	useEffect(() => {
-		getProjectList().then((res) => {
-			setProjectList(res);
-		});
-	}, []);
-
+const AboutSection = ({ projectList, userProfile }: AboutSectionProps) => {
 	return (
 		<div className={styles.aboutWrapper}>
 			<div className={styles.projectTitle}>프로덕트의 가치를 만들어내는 프론트엔드 개발자, 박규한입니다.</div>
@@ -38,23 +24,23 @@ const AboutSection = () => {
 					priority
 				/>
 				<div className={styles.rightInfoContainer}>
-					<div>Email.&nbsp;{USER_INFO.email}</div>
-					<div>Phone.&nbsp;{USER_INFO.phoneNumber}</div>
+					<div>Email.&nbsp;{userProfile.email}</div>
+					<div>Phone.&nbsp;{userProfile.phonenumber}</div>
 					<div>
 						Github.&nbsp;
-						<Link className={styles.link} href={USER_INFO.githubUrl}>
-							{USER_INFO.githubUrl}
+						<Link className={styles.link} href={userProfile.githuburl}>
+							{userProfile.githuburl}
 						</Link>
 					</div>
 					<div>
 						Blog.&nbsp;
-						<Link className={styles.link} href={USER_INFO.blogUrl}>
-							{USER_INFO.blogUrl}
+						<Link className={styles.link} href={userProfile.blogurl}>
+							{userProfile.blogurl}
 						</Link>
 					</div>
 					<div>
 						Portfolio.&nbsp;
-						<Link className={styles.link} href={USER_INFO.portfolioUrl}>
+						<Link className={styles.link} href={userProfile.portfoliourl}>
 							GyuhanPark_Portfolio
 						</Link>
 					</div>
