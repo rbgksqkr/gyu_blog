@@ -40,3 +40,13 @@ export interface ICommit {
 		private: boolean;
 	};
 }
+
+export interface IProject {
+	id: number;
+	title: string;
+	description: string;
+	date: string;
+	githuburl: string;
+	producturl: string;
+	imageurl: string;
+}
