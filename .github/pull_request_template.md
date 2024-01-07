@@ -1,5 +1,5 @@
 🚩 관련 이슈
-ex) [FEAT] #1 - 마이페이지 기능 구현
+ex) resolve #이슈번호
 
 📋 PR Checklist
 
