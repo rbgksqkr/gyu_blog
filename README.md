@@ -1,34 +1,25 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Gyu's Blog ✨
 
-## Getting Started
+# 📘 기능 소개
 
-First, run the development server:
+- Velog 게시글 데이터 가져오기
+  - 제목, 내용, 썸네일, 좋아요, 댓글, 태그
+  - velog의 RSS(Rich Site Summary)를 파싱하여 데이터 가져오기
+  - velog서버에 graphql fetch 요청을 보내 RSS에 없는 좋아요, 댓글, 태그 데이터 가져오기
+- github API를 활용하여 커밋 로그 페이지 구현
+  - 최근 일주일간 커밋 여부 체크
+  - 커밋 레포, 커밋 메세지, 커밋날짜 가져오기
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+# 🔥 TBD
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 홈화면에 스크롤 이벤트 적용(애니메이션 or threejs)
+- 소개화면 구현(기술스택 + 프로젝트 간단한 소개)
+- 다크모드 구현
+- 게시글 정렬 기능(시간순, 좋아요순, 댓글순)
+- 게시글 조회수 가져오기(권한 이슈ㅠ)
+- pagination(무한스크롤 or 페이지(ISR 적용))
+- post 일부만 가져오기(근데 ssg하면 빌드타임에 하나의 페이지가 생성되는데 필요할까에 대한 고민 -> next 14에서 SSG + revalidate 안되는 이슈를 SSR과 일부렌더링으로 해결? 고민)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# 🛠️ Teck Stack
+- Nextjs
+- Typescript
