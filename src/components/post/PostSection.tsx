@@ -15,10 +15,18 @@ const PostSection = ({ posts, userInfo }: PostSectionProps) => {
 		<div className={styles.postWrapper}>
 			<div className={styles.postLeftSection}>
 				{userInfo ? (
-					<>
-						<Image src={userInfo.url} alt='profile image' width={200} height={200} priority />
-						<div>{userInfo.title}</div>
-					</>
+					<div className={styles.userInfo}>
+						<Image
+							className={styles.profileImage}
+							src={userInfo.url}
+							alt='profile image'
+							width={200}
+							height={200}
+							priority
+						/>
+						<div>블로그 : {userInfo.title}</div>
+						<div>{'카테고리 >'}</div>
+					</div>
 				) : (
 					<Image src='/default_profile.png' alt='profile image' width={200} height={200} priority />
 				)}
@@ -34,6 +42,7 @@ const PostSection = ({ posts, userInfo }: PostSectionProps) => {
 									<div className={styles.likeWrapper}>
 										<div>좋아요 : {post.likes}</div>
 										<div>댓글 : {post.comments_count}</div>
+										<div>조회수 : {post.views}</div>
 									</div>
 									<div className={styles.tagWrapper}>
 										{post.tags.map((tag, idx) => (

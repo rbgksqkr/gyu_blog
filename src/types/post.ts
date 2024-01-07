@@ -10,6 +10,7 @@ export interface IPost {
 	tags: string[];
 	is_private: boolean | null;
 	likes: number;
+	views: number;
 }
 
 export interface IUserInfo {

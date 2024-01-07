@@ -1,5 +1,4 @@
 import { IPost } from '@/types/post';
-import axios from 'axios';
 import { NextRequest, NextResponse } from 'next/server';
 
 const getPosts = async (cursor: string): Promise<IPost[]> => {
@@ -24,18 +23,41 @@ const getPosts = async (cursor: string): Promise<IPost[]> => {
 	return data.data.posts;
 };
 
+const getViews = async (post_id: string) => {
+	const res = await fetch(`${process.env.NEXT_PUBLIC_VELOG_BASE_URL}`, {
+		method: 'POST',
+		next: { revalidate: 300 },
+		credentials: 'include',
+		headers: {
+			'Content-Type': 'application/json',
+			cookie: `access_token=${process.env.NEXT_PUBLIC_ACCESS_TOKEN}; refresh_token=${process.env.NEXT_PUBLIC_REFRESH_TOKEN}`,
+		},
+		body: JSON.stringify({
+			operationName: 'GetStats',
+			variables: {
+				post_id: post_id,
+			},
+			query: 'query GetStats($post_id: ID!) {getStats(post_id: $post_id) {total count_by_day {count day}}}',
+		}),
+	});
+
+	const data = await res.json();
+	return data.data.getStats.total;
+};
+
 export async function GET(req: NextRequest) {
-	const MAX_ITERATION = 5;
+	const MAX_ITERATION = 10;
 	let currentCursor = '';
 	const posts: IPost[] = [];
 	for (let i = 0; i < MAX_ITERATION; i++) {
 		const result = await getPosts(currentCursor);
-		posts.push(...result);
-		const lastPost = result[result.length - 1];
-		if (!lastPost) break;
+		if (result.length === 0) break;
+		for (let i = 0; i < result.length; i++) {
+			const views = await getViews(result[i].id);
+			posts.push({ ...result[i], views });
+		}
 		currentCursor = result[result.length - 1].id;
 	}
-
 	return NextResponse.json({ posts: posts }, { status: 200 });
 }
 
