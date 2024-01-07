@@ -34,6 +34,7 @@ const PostSection = ({ posts, userInfo }: PostSectionProps) => {
 									<div className={styles.likeWrapper}>
 										<div>좋아요 : {post.likes}</div>
 										<div>댓글 : {post.comments_count}</div>
+										<div>조회수 : {post.views}</div>
 									</div>
 									<div className={styles.tagWrapper}>
 										{post.tags.map((tag, idx) => (

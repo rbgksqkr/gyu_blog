@@ -23,7 +23,7 @@ const getPosts = async (cursor: string): Promise<IPost[]> => {
 	return data.data.posts;
 };
 
-const getViews = async () => {
+const getViews = async (post_id: string) => {
 	const res = await fetch(`${process.env.NEXT_PUBLIC_VELOG_BASE_URL}`, {
 		method: 'POST',
 		next: { revalidate: 300 },
@@ -35,7 +35,7 @@ const getViews = async () => {
 		body: JSON.stringify({
 			operationName: 'GetStats',
 			variables: {
-				post_id: 'a80de72a-703a-48ff-966a-64db829f252e',
+				post_id: post_id,
 			},
 			query: 'query GetStats($post_id: ID!) {getStats(post_id: $post_id) {total count_by_day {count day}}}',
 		}),
@@ -46,18 +46,18 @@ const getViews = async () => {
 };
 
 export async function GET(req: NextRequest) {
-	const views = await getViews();
 	const MAX_ITERATION = 10;
 	let currentCursor = '';
 	const posts: IPost[] = [];
 	for (let i = 0; i < MAX_ITERATION; i++) {
 		const result = await getPosts(currentCursor);
-		posts.push(...result);
-		const lastPost = result[result.length - 1];
-		if (!lastPost) break;
+		if (result.length === 0) break;
+		for (let i = 0; i < result.length; i++) {
+			const views = await getViews(result[i].id);
+			posts.push({ ...result[i], views });
+		}
 		currentCursor = result[result.length - 1].id;
 	}
-
 	return NextResponse.json({ posts: posts }, { status: 200 });
 }
 
