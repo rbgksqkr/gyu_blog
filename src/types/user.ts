@@ -3,9 +3,9 @@ export interface IProject {
 	title: string;
 	description: string;
 	date: string;
-	githuburl: string;
-	producturl: string;
-	imageurl: string;
+	github_url: string;
+	product_url: string;
+	image_url: string;
 }
 
 export interface IUserProfile {

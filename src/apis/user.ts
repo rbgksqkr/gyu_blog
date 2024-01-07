@@ -13,5 +13,5 @@ export const getProjectList = async (): Promise<IProject[]> => {
 
 export const getUserProfile = async (): Promise<IUserProfile> => {
 	const result = await Server.get('api/profile');
-	return result.data.user[0];
+	return result.data.user;
 };
