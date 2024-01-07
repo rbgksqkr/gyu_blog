@@ -3,12 +3,13 @@
 import { useEffect, useState } from 'react';
 import styles from './study.module.css';
 import { getRecentCommitList } from '@/apis/user';
-import { DAYS } from '@/constants';
+import { DAYS, PREV_WEEK, SECONDS_OF_DAY, TODAY } from '@/constants';
 import { ICommit } from '@/types/post';
 
 interface ICommitContainer {
 	id: number;
-	isCommitted: boolean;
+	isCommitted: string | boolean;
+	date: string | boolean;
 	day: string;
 	isToday: boolean;
 }
@@ -27,15 +28,31 @@ const CommitList = () => {
 	}, []);
 
 	const convertDate = (res: ICommit[]) => {
-		const lastWeek = [false, false, false, false, false, false, false];
-		let todayIdx = new Date(res[res.length - 1].commit.author.date).getDay();
+		const todayIdx = new Date().getDay();
+		const lastWeek = [
+			['', false],
+			['', false],
+			['', false],
+			['', false],
+			['', false],
+			['', false],
+			['', false],
+		];
+		for (let i = 0; i < 7; i++) {
+			const date = new Date(new Date(PREV_WEEK).getTime() + i * SECONDS_OF_DAY);
+			const day = date.getDay();
+			lastWeek[day][0] = date.toISOString().split('T')[0];
+		}
 		res.forEach((data) => {
-			lastWeek[new Date(data.commit.author.date).getDay()] = true;
+			const date = new Date(data.commit.author.date);
+			lastWeek[date.getDay()][1] = true;
 		});
+
 		setDateList(
 			DAYS.map((day, idx) => ({
 				id: idx,
-				isCommitted: lastWeek[idx],
+				isCommitted: lastWeek[idx][1],
+				date: lastWeek[idx][0],
 				day,
 				isToday: idx === todayIdx ? true : false,
 			})),
@@ -55,6 +72,7 @@ const CommitList = () => {
 								<div className={data.isToday ? styles.today : styles.day}>
 									{data.isToday ? `${data.day}(TODAY)` : data.day}
 								</div>
+								<div>{data.date}</div>
 								<div className={styles.commitBox}>{data.isCommitted ? '✔️' : ''}</div>
 							</div>
 						))}
@@ -65,8 +83,7 @@ const CommitList = () => {
 							{commits.map((data) => (
 								<div key={data.node_id} className={styles.commitItem}>
 									<div>
-										{data.repository.full_name} : {data.commit.message} |{' '}
-										{data.commit.author.date.toLocaleString().split('T')[0]}
+										{data.repository.full_name} : {data.commit.message} | {getYYMMDD(data.commit.author.date)}
 									</div>
 								</div>
 							))}
@@ -78,6 +95,10 @@ const CommitList = () => {
 			)}
 		</>
 	);
+};
+
+const getYYMMDD = (date: Date) => {
+	return date.toLocaleString().split('T')[0];
 };
 
 export default CommitList;
