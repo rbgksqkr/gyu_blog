@@ -41,7 +41,9 @@ const CommitList = () => {
 		for (let i = 0; i < 7; i++) {
 			const date = new Date(new Date(PREV_WEEK).getTime() + i * SECONDS_OF_DAY);
 			const day = date.getDay();
-			lastWeek[day][0] = date.toISOString().split('T')[0];
+			const offset = date.getTimezoneOffset() * 60000;
+			const dateOffset = new Date(date.getTime() - offset);
+			lastWeek[day][0] = dateOffset.toISOString().split('T')[0];
 		}
 		res.forEach((data) => {
 			const date = new Date(data.commit.author.date);
