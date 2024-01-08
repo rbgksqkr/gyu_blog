@@ -40,3 +40,11 @@ export interface ICommit {
 		private: boolean;
 	};
 }
+
+export interface ICommitContainer {
+	id: number;
+	isCommitted: string | boolean;
+	date: string | boolean;
+	day: string;
+	isToday: boolean;
+}

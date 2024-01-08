@@ -1,9 +1,9 @@
-import CommitList from '@/components/study/CommitList';
+import CommitSection from '@/components/study/CommitSection';
 
 const StudyPage = () => {
 	return (
 		<>
-			<CommitList />
+			<CommitSection />
 		</>
 	);
 };
