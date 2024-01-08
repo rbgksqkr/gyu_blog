@@ -27,7 +27,7 @@
 
 .today {
   font-weight: bold;
-  color: red;
+  color: var(--color-blue);
 }
 
 .commitBox {
@@ -44,4 +44,9 @@
 .commitItem {
   border: 1px solid black;
   padding: 10px 0px;
+}
+
+.todayCommit {
+  font-weight: bold;
+  color: var(--color-blue);
 }

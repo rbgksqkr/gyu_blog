@@ -3,26 +3,57 @@
   flex-direction: column;
   align-items: center;
   gap: 30px;
+  margin: 20px 0px;
 }
 
 .infoContainer {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   width: 50vw;
   padding: 20px;
-  gap: 60px;
   border-radius: 20px;
   box-shadow: 5px 5px 10px -5px;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.5s;
 }
 
+.infoContainer:hover {
+  transform: translateY(-10px);
+}
+
+.infoContainer .hoverBox{
+  position: absolute; 
+  width: 200px; 
+  height: 200px;
+  top: 0; 
+  left: 0; 
+}
+
+.hoverEvent .hoverBox{
+  background: linear-gradient(to right, rgba(0,0,0,0) ,var(--color-blue)); 
+  height: 400px; 
+  transform: rotateZ(20deg);
+  top: -100px; 
+  left: -250px; 
+  transition: 0.7s; 
+  opacity: 0.5;
+}
+
+.hoverEvent:hover .hoverBox{
+  left: 800px; 
+  opacity: 1;
+}
+
+
 .profileImage {
-  border-radius: 20px;
+  border-radius: 200px;
 }
 
 .link {
   text-decoration : none;
-  color: rgb(139, 139, 208);
+  color: var(--color-blue);
 }
 
 .rightInfoContainer {
@@ -32,25 +63,41 @@
   font-weight: bold;
 }
 
+.projectContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
 .projectTitle {
   font-size: 1.6rem;
   font-weight: bold;
 }
 
-.projectContainer {
+.projectWrapper {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  gap: 80px;
   width: 65vw;
   padding: 20px;
   border-radius: 20px;
   box-shadow: 5px 5px 10px -5px;
+  transition: all 0.5s;
+}
+
+.projectWrapper:hover {
+  transform: translateY(-20px);
+}
+
+.projectLeftWrapper{
+  flex-basis: 35vw;
 }
 
 .projectRightWrapper {
   display: flex;
   flex-direction: column;
+  flex-basis: 65vw;
   gap: 10px;
   font-weight: bold;
 }
