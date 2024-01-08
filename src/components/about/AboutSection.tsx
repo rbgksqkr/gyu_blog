@@ -30,7 +30,8 @@ const AboutSection = () => {
 			{isProfileLoading ? (
 				<div>프로필 로딩중...</div>
 			) : (
-				<div className={styles.infoContainer}>
+				<div className={`${styles.infoContainer} ${styles.hoverEvent}`}>
+					<div className={styles.hoverBox}></div>
 					<Image
 						className={styles.profileImage}
 						src='/image/github_profile.png'
@@ -66,10 +67,10 @@ const AboutSection = () => {
 			{isProjectLoading ? (
 				<div>프로젝트 로딩중...</div>
 			) : (
-				<>
+				<div className={styles.projectContainer}>
 					<div className={styles.projectTitle}>Projects</div>
 					{projectList.map((project) => (
-						<div className={styles.projectContainer} key={project.id}>
+						<div className={styles.projectWrapper} key={project.id}>
 							<div className={styles.projectLeftWrapper}>
 								<Image src={project.image_url} alt='project image' width={200} height={200} priority />
 							</div>
@@ -92,7 +93,7 @@ const AboutSection = () => {
 							</div>
 						</div>
 					))}
-				</>
+				</div>
 			)}
 		</div>
 	);
