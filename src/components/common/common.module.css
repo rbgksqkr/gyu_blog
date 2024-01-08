@@ -2,10 +2,11 @@
   display: flex;
   justify-content: space-around;
   padding: 20px 0px;
-  background-color: lightgray;
+  background-color: var(--color-blue);
 }
 
 .link {
   text-decoration : none;
-  color : black;
+  color : white;
+  font-weight: bold;
 }
