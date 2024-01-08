@@ -8,7 +8,11 @@ const CommitList = ({ commits }: { commits: ICommit[] }) => {
 				<div>
 					{commits.map((data) => (
 						<div key={data.node_id} className={styles.commitItem}>
-							<div>
+							<div
+								className={
+									new Date().getDate() === new Date(data.commit.author.date).getDate() ? styles.todayCommit : ''
+								}
+							>
 								{data.repository.full_name} : {data.commit.message} | {getYYMMDD(data.commit.author.date)}
 							</div>
 						</div>
