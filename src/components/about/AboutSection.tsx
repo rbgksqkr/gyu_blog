@@ -7,11 +7,6 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import styles from './about.module.css';
 
-interface AboutSectionProps {
-	projectList: IProject[];
-	userProfile: IUserProfile;
-}
-
 const AboutSection = () => {
 	const [projectList, setProjectList] = useState<IProject[]>([]);
 	const [userProfile, setUserProfile] = useState<IUserProfile>({} as IUserProfile);

@@ -1,7 +1,6 @@
-import { getProjectList, getUserProfile } from '@/apis/user';
 import AboutSection from '@/components/about/AboutSection';
 
-const AboutPage = async () => {
+const AboutPage = () => {
 	return (
 		<>
 			<AboutSection />
