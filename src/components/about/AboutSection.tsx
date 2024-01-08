@@ -35,7 +35,7 @@ const AboutSection = () => {
 						className={styles.profileImage}
 						src='/image/github_profile.png'
 						alt=''
-						width={150}
+						width={200}
 						height={200}
 						priority
 					/>
@@ -70,7 +70,9 @@ const AboutSection = () => {
 					<div className={styles.projectTitle}>Projects</div>
 					{projectList.map((project) => (
 						<div className={styles.projectContainer} key={project.id}>
-							<Image src={project.image_url} alt='' width={200} height={200} priority />
+							<div className={styles.projectLeftWrapper}>
+								<Image src={project.image_url} alt='project image' width={200} height={200} priority />
+							</div>
 							<div className={styles.projectRightWrapper}>
 								<div>{project.title}</div>
 								<div>{project.description}</div>
