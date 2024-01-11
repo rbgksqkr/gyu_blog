@@ -26,6 +26,12 @@ const CommitSection = () => {
 		);
 	}, []);
 
+	const getTodayCommitLength = () => {
+		const todayIdx = new Date().getDay();
+		const result = commits.filter((data) => new Date(data.commit.author.date).getDay() == todayIdx);
+		return result.length;
+	};
+
 	useEffect(() => {
 		getRecentCommitList().then((res) => {
 			setCommits(res);
@@ -40,7 +46,11 @@ const CommitSection = () => {
 				<div>로딩중...</div>
 			) : (
 				<>
-					<WeekCommitContainer commitWeekList={commitWeekList} />
+					<WeekCommitContainer
+						todayCommitCount={getTodayCommitLength()}
+						lastWeekCommitCount={commits.length}
+						commitWeekList={commitWeekList}
+					/>
 					<CommitList commits={commits} />
 				</>
 			)}
