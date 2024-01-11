@@ -34,6 +34,21 @@ const PostSection = ({ posts, userInfo }: PostSectionProps) => {
 			<div className={styles.postRightSection}>
 				{posts.length > 0 ? (
 					<>
+						<div className={styles.sortButtonWrapper}>
+							<Link href='/post/date' className={styles.link}>
+								최신순
+							</Link>
+							<Link href='/post/like' className={styles.link}>
+								좋아요순
+							</Link>
+							<Link href='/post/comment' className={styles.link}>
+								댓글순
+							</Link>
+							<Link href='/post/view' className={styles.link}>
+								조회순
+							</Link>
+						</div>
+
 						{posts.map((post) => (
 							<Link href={`https://velog.io/@ghenmaru/${post.url_slug}`} className={styles.postItem} key={post.id}>
 								<div className={styles.leftPost}>

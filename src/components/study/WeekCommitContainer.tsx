@@ -3,15 +3,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './study.module.css';
 
-const WeekCommitContainer = ({
-	todayCommitCount,
-	lastWeekCommitCount,
-	commitWeekList,
-}: {
+interface WeekCommitContainerProps {
 	todayCommitCount: number;
 	lastWeekCommitCount: number;
 	commitWeekList: ICommitContainer[];
-}) => {
+}
+
+const WeekCommitContainer = ({ todayCommitCount, lastWeekCommitCount, commitWeekList }: WeekCommitContainerProps) => {
 	return (
 		<>
 			<div className={styles.commitHeader}>

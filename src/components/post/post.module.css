@@ -35,6 +35,23 @@
   padding: 30px 0px;
 }
 
+.sortButtonWrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.sortButtonWrapper .link {
+  text-decoration: none;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 20px;
+}
+
+.sortButtonWrapper .link:hover {
+  background-color: var(--color-blue);
+  color:white;
+}
+
 .postItem {
   display: flex;
   align-items: center;
