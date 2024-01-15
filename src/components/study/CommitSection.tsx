@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { getRecentCommitList } from '@/apis/user';
-import { DAYS, PREV_WEEK, SECONDS_OF_DAY } from '@/constants';
+import { DAYS, PREV_WEEK, SECONDS_OF_DAY, TODAY } from '@/constants';
 import { ICommit, ICommitContainer } from '@/types/post';
 import WeekCommitContainer from './WeekCommitContainer';
 import CommitList from './CommitList';
@@ -69,7 +69,7 @@ const convertDate = (res: ICommit[]) => {
 		['', false],
 	];
 	for (let i = 0; i < 7; i++) {
-		const date = new Date(new Date(PREV_WEEK).getTime() + i * SECONDS_OF_DAY);
+		const date = new Date(new Date(TODAY).getTime() - i * SECONDS_OF_DAY);
 		const day = date.getDay();
 		const offset = date.getTimezoneOffset() * 60000;
 		const dateOffset = new Date(date.getTime() - offset);
