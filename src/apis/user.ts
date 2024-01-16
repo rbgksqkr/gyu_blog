@@ -8,7 +8,7 @@ const getCommitList = async (): Promise<ICommit[]> => {
 	const today = TODAY.split('T')[0];
 	const prevWeek = PREV_WEEK.split('T')[0];
 	const result = await axios.get(
-		`https://api.github.com/search/commits?q=author:rbgksqkr+committer-date:${prevWeek}..${today}&per_page=100`,
+		`https://api.github.com/search/commits?q=author:rbgksqkr+committer-date:${prevWeek}T00:00:00Z..${today}T23:59:59&per_page=100`,
 		{
 			headers: {
 				Authorization: `token ${process.env.NEXT_PUBLIC_GITHUB_TOKEN}`,

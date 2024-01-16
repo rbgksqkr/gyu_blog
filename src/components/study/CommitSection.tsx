@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { getRecentCommitList } from '@/apis/user';
-import { DAYS, PREV_WEEK, SECONDS_OF_DAY, TODAY } from '@/constants';
+import { DAYS, SECONDS_OF_DAY, TODAY } from '@/constants';
 import { ICommit, ICommitContainer } from '@/types/post';
 import WeekCommitContainer from './WeekCommitContainer';
 import CommitList from './CommitList';
@@ -75,6 +75,7 @@ const convertDate = (res: ICommit[]) => {
 		const dateOffset = new Date(date.getTime() - offset);
 		lastWeek[day][0] = dateOffset.toISOString().split('T')[0];
 	}
+
 	res.forEach((data) => {
 		const date = new Date(data.commit.author.date);
 		lastWeek[date.getDay()][1] = true;
